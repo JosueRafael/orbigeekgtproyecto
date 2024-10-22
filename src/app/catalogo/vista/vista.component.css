@@ -1,0 +1,204 @@
+/* Barra de navegación */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/*Logo y barra de navegación*/
+.navbar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*Tamaño logo*/
+.logo {
+  width: 80px;
+  height: auto;
+}
+
+/* Nombre de la empresa */
+.company-name {
+  margin-top: 10px;
+  font-size: 16px;   font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.navbar-center {
+  flex-grow: 1;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* Sección derecha de íconos*/
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right a {
+  margin: 0 10px;
+  color: #f33;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.navbar-right i {
+  font-size: 1.5em;
+}
+
+/* Estilo para la segunda fila con los enlaces de navegación */
+.navbar-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.links-left {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.links-left a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Estructura principal de la barra lateral */
+
+.menu-categories i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #555;
+}
+
+
+/* Contenedor principal que agrupa el menú lateral y la cuadrícula de productos */
+.main-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+}
+
+.menu-categories {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu-categories li {
+  margin: 15px 0;
+}
+
+.menu-categories a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+
+.menu-categories a:hover {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+
+/* Cuadrícula de productos */
+.products-wrapper {
+  flex-grow: 1;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Ajusta automáticamente los productos por fila */
+  gap: 20px;
+  justify-items: center;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  width: 180px; /* Tamaño fijo de las tarjetas */
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.product-card span {
+  color: red;
+  font-weight: bold;
+}
+
+/* Estilos para la paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.pagination a {
+  color: #333;
+  padding: 10px 15px;
+  margin: 0 5px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination a.active {
+  background-color: #f33;
+  color: #fff;
+}

@@ -1,0 +1,21 @@
+<h1>Productos al carrito</h1>
+<hr>
+
+<div class="row">
+  <div class="col">
+
+    <!-- onDelete -->
+    <product-list [productList]="products"
+              (onDelete)="onDeleteProduct($event)"></product-list>
+  </div>
+
+  <div class="col">
+    <!-- add-product -->
+    <add-product (onNewProduct)="onNewProduct($event)" ></add-product>
+
+
+  </div>
+</div>
+
+<hr>
+<button routerLink="/checkout" class="btn btn-primary">Ir a Checkout</button>
