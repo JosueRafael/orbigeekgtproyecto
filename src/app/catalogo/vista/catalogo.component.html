@@ -1,0 +1,69 @@
+<header>
+  <nav class="container">
+      <div class="row">
+          <div class="union">
+              <div class="logo_img">
+                  <img class="logo_header" src="assets/img/logo.jpg" alt="">
+              </div>
+              <div class="search-container">
+                  <input type="text" placeholder="Buscar..." />
+                  <i class="fas fa-search search-icon"></i>
+              </div>
+              <div class="carrito">
+                <button class="btn btn-carrito" [routerLink]="['/checkout']">
+                    <i class="fa-solid fa-cart-shopping icon_carrito"></i>
+                </button>
+              </div>
+              <div class="user">
+                  <button class="btn-user" [routerLink]="['/auth']">
+                      <i class="fa-solid fa-user icon_user"></i>
+                  </button>
+              </div>
+              <div class="logout" *ngIf="userName">
+                <button class="btn-logout" (click)="onLogout()">
+                  <i class="fa-solid fa-right-from-bracket icon_logout"></i>
+                </button>
+              </div>
+          </div>
+      </div>
+  </nav>
+</header>
+<nav class="navbar">
+  <div class="links-left">
+    <a href="#" [routerLink]="['/']">Home</a>
+    <a href="#" class="active">Catálogo</a>
+    <a href="#">Ayuda</a>
+    <a href="#" *ngIf="userName" [routerLink]="['/misordenes']">Mis Órdenes</a>
+    <a *ngIf="userName" href="#">Hola, {{ userName }}</a>
+  </div>
+</nav>
+
+<div class="main-content">
+  <div class="sidebar">
+    <ul class="menu-categories">
+      <li><a href="#"><i class="fas fa-tv"></i> TV y Video</a></li>
+      <li><a href="#"><i class="fas fa-gamepad"></i> Videojuegos</a></li>
+      <li><a href="#"><i class="fas fa-laptop"></i> Computación</a></li>
+      <li><a href="#"><i class="fas fa-volume-up"></i> Audio</a></li>
+      <li><a href="#"><i class="fas fa-camera"></i> Drones y Cámaras</a></li>
+      <li><a href="#"><i class="fas fa-mobile-alt"></i> Smartphones</a></li>
+      <li><a href="#"><i class="fas fa-print"></i> Impresoras</a></li>
+      <li><a href="#"><i class="fas fa-headphones"></i> Accesorios</a></li>
+      <li><a href="#"><i class="fas fa-chair"></i> Sillas Gamer</a></li>
+      <li><a href="#"><i class="fas fa-cogs"></i> Software</a></li>
+    </ul>
+  </div>
+
+  <div class="products-wrapper">
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let producto of productos">
+        <img src="assets/img/RazerM.jpeg" alt="Mouse Microsoft Comfort" class="product-image">
+        <h3>{{ producto.nombre }}</h3>
+        <p>Precio contado: <span>Q{{ producto.precio }}</span></p>
+        <p>{{ producto.categoria }}</p>
+        <p>Cantidad en stock: {{ producto.cantidad }}</p>
+        <!-- Se pasa el producto específico al método agregarAlCarrito -->
+        <button class="btn-agregar-carrito" (click)="agregarAlCarrito(producto)">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>

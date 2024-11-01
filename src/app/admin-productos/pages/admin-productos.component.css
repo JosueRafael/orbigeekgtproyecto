@@ -1,0 +1,166 @@
+.admin-productos-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f4f4f4;
+  padding: 20px;
+  gap: 20px;
+}
+
+.formulario-container, .productos-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-container {
+  width: 45%;
+}
+
+.productos-container {
+  width: 50%;
+}
+
+.admin-productos-title, .productos-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.admin-productos-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar los elementos en el eje horizontal */
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 95%; /* Hacemos que los campos ocupen todo el ancho disponible */
+  max-width: 400px; /* Establecemos un ancho máximo para no ocupar todo el contenedor */
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #df3e46;
+}
+
+.btn-submit {
+  background-color: #df3e46;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.btn-submit:hover {
+  background-color: #c8323d;
+}
+
+/* Estilo de la tabla de productos */
+.productos-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.productos-table th, .productos-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.productos-table th {
+  background-color: #df3e46;
+  color: white; /* Cambia el color del texto a blanco */
+}
+
+.productos-table td {
+  background-color: #fff;
+  color: #333;
+  text-align: center;/* Mantener el color negro para los datos de las celdas */
+}
+
+.productos-table td, .productos-table th {
+  font-size: 14px;
+}
+.btn-action {
+  background-color: #df3e46; /* Color del botón */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px; /* Espaciado interno */
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px; /* Espaciado entre botones */
+}
+
+.btn-action:hover {
+  background-color: #c8323d; /* Color más oscuro al pasar el mouse */
+}
+
+
+/* Menu en una columna a la izquierda */
+.menu_nav {
+  background-color: #f8f9fa;
+  padding-top: 20px;
+  height: 100vh;
+}
+
+/* Logo en la parte superior izquierda */
+.logo_img {
+  display: flex;
+  justify-content: center;
+}
+
+.logo_header {
+  width: 150px;
+  height: auto;
+}
+
+.nav-link {
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.nav-link:hover {
+  background-color: #DF3E46;
+  color: white;
+}
+
+/* Area de contenido */
+#contentArea {
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+}

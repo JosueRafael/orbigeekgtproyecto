@@ -1,36 +1,184 @@
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
+    <style>
+        .error {
+            border: 2px solid red;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .success-message {
+            color: green;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+    </style>
+
 </head>
-<body>
-    <div class="registration-container">
-        <p class="registration-title">Registrate</p>
-        <div class="form-field">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Nombre">
-        </div>
-        <div class="form-field">
-            <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" placeholder="Apellido">
-        </div>
-        <div class="form-field">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" placeholder="Correo">
-        </div>
-        <div class="form-field">
-            <label for="contrasena">Contraseña</label>
-            <input type="password" id="contrasena" placeholder="Contraseña">
-        </div>
-        <div class="form-field">
-          <label for="contrasena">Confirmar Contraseña</label>
-          <input type="password" id="contrasena" placeholder="Contraseña">
+<header>
+  <nav class="container">
+      <div class="row">
+          <div class="union">
+              <div class="logo_img">
+                  <img class="logo_header" src="assets/img/logo.jpg" alt="">
+              </div>
+              <div class="search-container">
+                  <input type="text" placeholder="Buscar..." />
+                  <i class="fas fa-search search-icon"></i>
+              </div>
+              <div class="carrito">
+                <button class="btn btn-carrito" [routerLink]="['/checkout']">
+                    <i class="fa-solid fa-cart-shopping icon_carrito"></i>
+                </button>
+              </div>
+
+              <div class="user">
+                  <button class="btn-user" [routerLink]="['/auth']">
+                      <i class="fa-solid fa-user icon_user"></i>
+                  </button>
+              </div>
+          </div>
       </div>
-        <button class="registration-button">
-            Registrar
-        </button>
+  </nav>
+</header>
+<nav class="navbar">
+  <div class="links-left">
+    <a href="#" [routerLink]="['/']">Home</a>
+    <a href="#" [routerLink]="['/catalogo']">Catálogo</a>
+    <a href="#">Ayuda</a>
+  </div>
+</nav>
+<body>
+
+  <div class="registration-container">
+    <p class="registration-title">Registrate</p>
+
+    <div class="form-field">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="name" [(ngModel)]="name" placeholder="Nombre">
+  </div>
+
+    <div class="form-field">
+      <label for="correo">Correo</label>
+      <input type="email" id="correo" [(ngModel)]="email" placeholder="Correo">
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
     </div>
+
+    <div class="form-field password-toggle">
+      <label for="contrasena">Contraseña</label>
+      <input type="password" id="contrasena" [(ngModel)]="password" (input)="validatePassword()" placeholder="Contraseña">
+      <span class="toggle-icon" (click)="togglePasswordVisibility()">
+        <i [class]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+      </span>
+    </div>
+
+    <div class="password-requirements">
+      <label [class.valid]="hasUpperCase" id="uppercaseLabel">
+        <input type="checkbox" id="uppercaseCheck" [checked]="hasUpperCase" disabled>
+        Al menos una mayúscula
+      </label>
+      <label [class.valid]="hasLowerCase" id="lowercaseLabel">
+        <input type="checkbox" id="lowercaseCheck" [checked]="hasLowerCase" disabled>
+        Al menos una minúscula
+      </label>
+      <label [class.valid]="hasNumber" id="numberLabel">
+        <input type="checkbox" id="numberCheck" [checked]="hasNumber" disabled>
+        Al menos un número
+      </label>
+      <label [class.valid]="hasMinLength" id="minLengthLabel">
+        <input type="checkbox" id="minLengthCheck" [checked]="hasMinLength" disabled>
+        Al menos 8 caracteres
+      </label>
+    </div>
+
+    <div class="form-field password-toggle">
+      <label for="contrasena-confirm">Confirmar Contraseña</label>
+      <input [type]="showPassword ? 'text' : 'password'" id="contrasena-confirm" [(ngModel)]="confirmPassword" placeholder="Confirmar Contraseña">
+      <span class="toggle-icon" (click)="toggleConfirmPasswordVisibility()">
+        <i [class]="confirmPasswordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+      </span>
+    </div>
+
+
+    <button class="registration-button" (click)="register()">Registrar</button>
+
+    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+  </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js"></script>
+    <script>
+        // Tu configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCcJ68NLJzINtOWh4zAgcXI5PSefZEDtZ4",
+            authDomain: "proyectoangular-d3ced.firebaseapp.com",
+            projectId: "proyectoangular-d3ced",
+            storageBucket: "proyectoangular-d3ced.appspot.com",
+            messagingSenderId: "491714539281",
+            appId: "1:491714539281:web:0f2ab3527fade8cce726b0"
+        };
+
+        // Inicializa Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        function validateForm() {
+            // Limpiar mensajes de error y éxito previos
+            document.getElementById("correo-error").innerText = '';
+            document.getElementById("contrasena-error").innerText = '';
+            document.getElementById("success-message").innerText = '';
+
+            // Obtener los valores de los campos
+            const correo = document.getElementById("correo").value;
+            const contrasena = document.getElementById("contrasena").value;
+            const contrasenaConfirm = document.getElementById("contrasena-confirm").value;
+
+            let isValid = true;
+
+            // Validar correo
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!emailPattern.test(correo)) {
+                document.getElementById("correo-error").innerText = "El correo es inválido.";
+                isValid = false;
+            }
+
+            // Validar contraseñas
+            if (contrasena !== contrasenaConfirm) {
+                document.getElementById("contrasena-error").innerText = "Las contraseñas no coinciden.";
+                isValid = false;
+            }
+
+            // Si el formulario es válido, proceder a registrar al usuario
+            if (isValid) {
+                registerUser(correo, contrasena);
+            }
+        }
+
+        function registerUser(correo, contrasena) {
+            auth.createUserWithEmailAndPassword(correo, contrasena)
+                .then((userCredential) => {
+                    // Usuario registrado exitosamente
+                    document.getElementById("success-message").innerText = "Usuario registrado exitosamente.";
+                })
+                .catch((error) => {
+                    // Manejar errores
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    if (errorCode === 'auth/email-already-in-use') {
+                        document.getElementById("correo-error").innerText = "El correo ya está en uso.";
+                    } else {
+                        document.getElementById("correo-error").innerText = errorMessage;
+                    }
+                });
+        }
+    </script>
 </body>
-</html>
+

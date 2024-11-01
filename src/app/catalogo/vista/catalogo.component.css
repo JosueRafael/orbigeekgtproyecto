@@ -1,0 +1,217 @@
+/* Barra de navegación */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo e íconos de búsqueda, carrito y usuario */
+.logo_header {
+  width: 100%;
+  height: 150px;
+}
+
+.union {
+  display: flex;
+}
+
+.logo_img {
+  width: 18%;
+}
+
+.search-container {
+  position: relative;
+  width: 60%;
+}
+
+.search-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  padding-left: 40px;
+  border-radius: 20px;
+  margin-top: 11%;
+  margin-left: 5%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 50px;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+.carrito {
+  width: 4%;
+  margin-left: 8%;
+}
+
+.btn-carrito {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #df3e46;
+  font-size: 30px;
+  margin-top: 170%;
+}
+
+.user {
+  width: 4%;
+}
+
+.btn-user {
+  width: 100%;
+  border: none;
+  margin-top: 170%;
+  background: transparent;
+  color: #df3e46;
+  font-size: 30px;
+}
+
+/* Enlaces de navegación secundaria */
+.links-left {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.links-left a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.links-left a:hover,
+.links-left a.active {
+  background-color: #df3e46;
+  color: white;
+}
+
+/* Estructura principal */
+.main-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+}
+
+.menu-categories {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu-categories li {
+  margin: 15px 0;
+}
+
+.menu-categories a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-categories a:hover {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+.menu-categories i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #555;
+}
+
+/* Cuadrícula de productos */
+.products-wrapper {
+  flex-grow: 1;
+}
+
+.product-image {
+  width: 100%; /* Ajusta la imagen al ancho de la tarjeta */
+  height: auto; /* Mantiene la proporción de la imagen */
+  max-height: 150px; /* Limita la altura máxima de la imagen */
+  object-fit: cover; /* Recorta la imagen para que se ajuste sin deformarse */
+  border-radius: 5px; /* Añade bordes redondeados a la imagen */
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  width: 180px;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.product-card span {
+  color: red;
+  font-weight: bold;
+}
+
+.btn-agregar-carrito {
+  background-color: #df3e46;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-agregar-carrito:hover {
+  background-color: #b8323b;
+}
+
+.logout{
+  width: 4%;
+}
+
+.btn-logout {
+  width: 100%;
+  border: none;
+  margin-top: 170%;
+  background: transparent;
+  color: #df3e46;
+  font-size: 30px;
+}

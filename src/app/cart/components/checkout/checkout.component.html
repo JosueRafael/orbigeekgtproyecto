@@ -1,5 +1,46 @@
+<header>
+  <nav class="container">
+    <div class="row">
+      <div class="union">
+        <div class="logo_img">
+          <img class="logo_header" src="assets/img/logo.jpg" alt="">
+        </div>
+        <div class="search-container">
+          <input type="text" placeholder="Buscar..." />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+        <div class="carrito">
+          <button class="btn btn-carrito" [routerLink]="['/checkout']">
+            <i class="fa-solid fa-cart-shopping icon_carrito"></i>
+          </button>
+        </div>
+        <div class="user">
+          <button class="btn-user" [routerLink]="['/auth']">
+            <i class="fa-solid fa-user icon_user"></i>
+          </button>
+        </div>
+        <div class="logout" *ngIf="userName">
+          <button class="btn-logout" (click)="onLogout()">
+            <i class="fa-solid fa-right-from-bracket icon_logout"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<nav class="navbar">
+  <div class="links-left">
+    <a href="#" [routerLink]="['/']">Home</a>
+    <a href="#" [routerLink]="['/catalogo']">Catálogo</a>
+    <a href="#">Ayuda</a>
+    <a href="#" *ngIf="userName" [routerLink]="['/misordenes']">Mis Órdenes</a>
+    <a *ngIf="userName" href="#">Hola, {{ userName }}</a>
+
+  </div>
+</nav>
+
 <div class="checkout-container">
-  <div class="row">
+  <div class="row-c">
     <div class="col-8">
       <h2>Cart Checkout</h2>
       <table class="table">
@@ -7,25 +48,32 @@
           <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Marca</th>
-            <th>Tipo</th>
             <th>Precio</th>
+            <th>Cantidad</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products; let i = index">
+          <tr *ngFor="let item of carrito; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.brand }}</td>
-            <td>{{ product.type }}</td>
-            <td>Q {{ product.price }}</td>
-            <td><button class="btn btn-danger" (click)="removeProduct(i)">Eliminar</button></td>
+            <td>{{ item.producto.nombre }}</td> <!-- Usando item.producto.nombre -->
+            <td>Q {{ item.producto.precio * item.cantidad }}</td> <!-- Calcula el precio total por cantidad -->
+            <td>
+              <button (click)="decrementarCantidad(item)">-</button>
+              <span>{{ item.cantidad }}</span>
+              <button (click)="incrementarCantidad(item)">+</button>
+            </td>
+            <td>
+              <button (click)="eliminarDelCarrito(item)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
           </tr>
         </tbody>
-      </table>
 
-      <h3>Precio Total: Q {{ totalPrice }}</h3>
+
+      </table>
+      <h3>Total a Pagar: Q {{ totalAPagar }}</h3>
     </div>
 
     <div class="col-4">
@@ -33,33 +81,39 @@
         <h3>Detalles de la Tarjeta</h3>
         <div class="form-group">
           <label for="card-name">Nombre en la tarjeta</label>
-          <input id="card-name" type="text" class="form-control" placeholder="Nombre" [(ngModel)]="cardName">
+          <input id="card-name" type="text" class="form-control" placeholder="Nombre">
         </div>
 
         <div class="form-group">
           <label for="card-number">Número de Tarjeta</label>
-          <input id="card-number" type="text" class="form-control" placeholder="0000 0000 0000 0000" [(ngModel)]="cardNumber" maxlength="16">
+          <input id="card-number" type="text" class="form-control" placeholder="0000 0000 0000 0000" maxlength="16">
         </div>
 
         <div class="form-group row">
           <div class="col-6">
             <label for="card-expiry">Fecha de Expiración</label>
-            <input id="card-expiry" type="text" class="form-control" placeholder="MM/YY" [(ngModel)]="cardExpiry" maxlength="5">
+            <input id="card-expiry" type="text" class="form-control" placeholder="MM/YY" maxlength="5">
           </div>
           <div class="col-6">
             <label for="card-cvv">CVV</label>
-            <input id="card-cvv" type="text" class="form-control" placeholder="CVV" [(ngModel)]="cardCVV" maxlength="3">
+            <input id="card-cvv" type="text" class="form-control" placeholder="CVV" maxlength="3">
           </div>
         </div>
 
         <hr>
 
-        <h4>Total a Pagar: Q {{ totalPrice }}</h4>
+        <h4>Total a Pagar: Q {{ totalAPagar }}</h4>
 
-        <button class="btn btn-danger btn-block" (click)="placeOrder()" [disabled]="!isCardValid()">Ordenar</button>
+        <button class="btn btn-danger btn-block" (click)="ordenar()">Ordenar</button>
 
-        <div *ngIf="orderMessage" class="mt-3">
-          <p>{{ orderMessage }}</p>
+        <div class="mt-3">
+          <div *ngIf="ordenExitosa" class="mensaje-exito">
+            <p>¡Orden realizada con éxito!</p>
+            <p>No. de orden: {{ ordenId }}</p>
+            <button (click)="cerrarMensaje()">Cerrar</button>
+          </div>
+
+          <p></p>
         </div>
       </div>
     </div>

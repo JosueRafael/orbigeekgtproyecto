@@ -1,0 +1,45 @@
+/* Menu en una columna a la izquierda */
+.menu_nav {
+  background-color: #f8f9fa;
+  padding-top: 20px;
+  height: 100vh;
+}
+
+/* Logo en la parte superior izquierda */
+.logo_img {
+  display: flex;
+  justify-content: center;
+}
+
+.logo_header {
+  width: 150px;
+  height: auto;
+}
+
+.nav-link {
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.nav-link:hover {
+  background-color: #DF3E46;
+  color: white;
+}
+
+/* Area de contenido */
+#contentArea {
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+}

@@ -1,0 +1,70 @@
+<header>
+  <nav class="container">
+      <div class="row">
+          <div class="union">
+              <div class="logo_img">
+                  <img class="logo_header" src="assets/img/logo.jpg" alt="">
+              </div>
+              <div class="search-container">
+                  <input type="text" placeholder="Buscar..." />
+                  <i class="fas fa-search search-icon"></i>
+              </div>
+              <div class="carrito">
+                <button class="btn btn-carrito" [routerLink]="['/checkout']">
+                    <i class="fa-solid fa-cart-shopping icon_carrito"></i>
+                </button>
+              </div>
+              <div class="user">
+                  <button class="btn-user" [routerLink]="['/auth']">
+                      <i class="fa-solid fa-user icon_user"></i>
+                  </button>
+              </div>
+              <div class="logout" *ngIf="userName">
+                <button class="btn-logout" (click)="onLogout()">
+                  <i class="fa-solid fa-right-from-bracket icon_logout"></i>
+                </button>
+              </div>
+          </div>
+      </div>
+  </nav>
+</header>
+<nav class="navbar">
+  <div class="links-left">
+    <a href="#" [routerLink]="['/']">Home</a>
+    <a href="#" [routerLink]="['/catalogo']">Catálogo</a>
+    <a href="#">Ayuda</a>
+    <a href="#" *ngIf="userName" class="active">Mis Órdenes</a>
+    <a *ngIf="userName" href="#">Hola, {{ userName }}</a>
+  </div>
+</nav>
+
+<div *ngIf="ordenes.length > 0; else noOrdenes">
+  <h2>Mis Órdenes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Orden ID</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orden of ordenes">
+        <td>{{ orden.id }}</td>
+        <td>{{ orden.fechaCreacion | date:'short' }}</td>
+        <td>{{ orden.total | currency }}</td>
+        <td>
+          <button (click)="verDetalles(orden)">Ver detalles</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noOrdenes>
+  <p>No tienes órdenes realizadas.</p>
+</ng-template>
+
+
+

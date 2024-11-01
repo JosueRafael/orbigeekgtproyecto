@@ -1,91 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORBIGEEK_GT</title>
+<header>
+  <nav class="container">
+      <div class="row">
+          <div class="union">
+              <div class="logo_img">
+                  <img class="logo_header" src="assets/img/logo.jpg" alt="">
+              </div>
+              <div class="search-container">
+                  <input type="text" placeholder="Buscar..." />
+                  <i class="fas fa-search search-icon"></i>
+              </div>
+              <div class="carrito">
+                <button class="btn btn-carrito" [routerLink]="['/checkout']">
+                    <i class="fa-solid fa-cart-shopping icon_carrito"></i>
+                </button>
+              </div>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="./index-page.component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+              <div class="user">
+                  <button class="btn-user" [routerLink]="['/auth']">
+                      <i class="fa-solid fa-user icon_user"></i>
+                  </button>
+              </div>
+              <div class="logout" *ngIf="userName">
+                <button class="btn-logout" (click)="onLogout()">
+                  <i class="fa-solid fa-right-from-bracket icon_logout"></i>
+                </button>
+              </div>
 
-</head>
-<body>
-    <header>
-        <nav class="container">
-            <div class="row">
-                <div class="union">
-                    <div class="logo_img">
-                        <img class="logo_header" src="assets/img/logo.jpg" alt="">
-                    </div>
-                    <div class="search-container">
-                        <input type="text" placeholder="Buscar..." />
-                        <i class="fas fa-search search-icon"></i>
-                     </div>
-                    <div class="carrito">
-                        <button class="btn-carrito">
-                            <i class="fa-solid fa-cart-shopping icon_carrito"></i>
-                        </button>
-                    </div>
-                    <div class="user">
-                      <button class="btn-user" [routerLink]="['/auth']">
-                        <i class="fa-solid fa-user icon_user"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="menu_nav">
-                <ul class="union">
-                    <a class=" rojo" href="/" target="_blank"> <!-- redericciona -->
-                        <i class="fa-solid fa-house"></i> Home
-                    </a>
-                    <a class="link" href="productos.html" target="_blank"> <!-- redericcionara a la otra pagina de productos -->
+          </div>
+      </div>
+  </nav>
+</header>
+<nav class="navbar">
+  <div class="links-left">
+    <a href="#" class="active">Home</a>
+    <a href="#" [routerLink]="['/catalogo']">Catálogo</a>
+    <a href="#">Ayuda</a>
+    <a href="#" *ngIf="userName" [routerLink]="['/misordenes']">Mis Órdenes</a>
+    <a *ngIf="userName" href="#">Hola, {{ userName }}</a>
+  </div>
+</nav>
 
-                        <span>
-                            <i class="fa-solid fa-store"></i> Productos
-                        </span>
-                    </a>
-                    <a class="link" href="ayuda.html" target="_blank"> <!-- fdsdg -->
+<div class="main-content">
+  <div class="sidebar">
+    <ul class="menu-categories">
+      <li><a href="#"><i class="fas fa-tv"></i> TV y Video</a></li>
+      <li><a href="#"><i class="fas fa-gamepad"></i> Videojuegos</a></li>
+      <li><a href="#"><i class="fas fa-laptop"></i> Computación</a></li>
+      <li><a href="#"><i class="fas fa-volume-up"></i> Audio</a></li>
+      <li><a href="#"><i class="fas fa-camera"></i> Drones y Cámaras</a></li>
+      <li><a href="#"><i class="fas fa-mobile-alt"></i> Smartphones</a></li>
+      <li><a href="#"><i class="fas fa-print"></i> Impresoras</a></li>
+      <li><a href="#"><i class="fas fa-headphones"></i> Accesorios</a></li>
+      <li><a href="#"><i class="fas fa-chair"></i> Sillas Gamer</a></li>
+      <li><a href="#"><i class="fas fa-cogs"></i> Software</a></li>
+    </ul>
+  </div>
 
-                        <span>
-                            <i class="fa-solid fa-circle-info"></i> Ayuda
-                        </span>
-                    </a>
-                    <a class="link" href="https://www.kemik.gt/" target="_blank"> <!-- fdsdg -->
-
-                        <span>
-                            <i class="fa-solid fa-list"></i> Categoria
-                        </span>
-                    </a>
-
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main class="container">
-        <div class="row">
-            <div class="container_imghome">
-                <img class="img_page" src="assets/img/homepageproducts.png" alt="">
-            </div>
-
-        </div>
-        <div class="row card_logos">
-            <div class="col-md-3 card_right">
-                <img class="img_hp" src="assets/img/hp.png" alt="">
-
-            </div>
-            <div class="col-md-3 card_right">
-                <img class="img_DELL" src="assets/img/dell.png" alt="">
-            </div>
-            <div class="col-md-3 card_right card_lenovo">
-                <img class="img_Lenovo" src="assets/img/Lenovo.png" alt="">
-            </div>
-            <div class="col-md-3 ">
-                <img class="img_apple" src="assets/img/logotipo-de-apple.png" alt="">
-            </div>
-        </div>
-        <br><br>
-    </main>
-
-</body>
-</html>
+  <main class="container">
+    <div class="container_imghome">
+      <img class="img_page" src="assets/img/homepageproducts.png" alt="Imagen principal">
+    </div>
+  </main>
+</div>
